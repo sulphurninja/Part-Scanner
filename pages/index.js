@@ -1,13 +1,28 @@
 import React, { useState, useRef } from 'react';
-import Barcode from 'react-barcode';
+import QRCode from 'qrcode.react';
 
 function MachinePartBarcodeGenerator() {
   const [partName, setPartName] = useState('');
   const [partInfo, setPartInfo] = useState('');
+  const [scannedInfo, setScannedInfo] = useState('');
   const barcodeRef = useRef(null);
+  const [barcodeValue, setBarcodeValue] = useState('');
 
   function generateBarcode() {
-    barcodeRef.current.value = `${partName} - ${partInfo}`;
+    // generate a random 7-digit number and set it as the barcode value
+
+  
+    // encode the part name and information as metadata in a QR code
+  const qrCodeValue = `Part Name: ${partName} | Part Information : ${partInfo}`;
+
+  
+    setBarcodeValue(qrCodeValue);
+    setScannedInfo(qrCodeValue);
+  }
+  
+  function getPartInfo() {
+    // retrieve the part name and information using the barcode value
+    return scannedInfo ? scannedInfo : 'Scan a barcode to view part information';
   }
 
   return (
@@ -40,7 +55,7 @@ function MachinePartBarcodeGenerator() {
         </div>
       </form>
       <div className="my-8">
-        <Barcode value={`${partName.slice(0,3)}${Math.floor(Math.random() * 9098999)}`} ref={barcodeRef} />
+      <QRCode value={barcodeValue} />
       </div>
       <div className="text-center">
         <button
@@ -49,6 +64,11 @@ function MachinePartBarcodeGenerator() {
         >
           Generate Barcode
         </button>
+      </div>
+      <div className="text-center">
+        <p className="text-gray-700 font-bold mb-2">
+          Scanned Part Information: {getPartInfo()}
+        </p>
       </div>
     </div>
   );
