@@ -1,5 +1,5 @@
 {
-  "name": "butterfly",
+  "name": "partinformation",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,12 @@
     "@next/font": "13.1.5",
     "next": "13.1.5",
     "react": "18.2.0",
+    "react-barcode": "^1.4.6",
     "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.2.4"
   }
 }
